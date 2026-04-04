@@ -19,7 +19,7 @@ export function TopBar({ title, onMenuClick }) {
     <header className="h-14 bg-white border-b border-border flex items-center justify-between px-6 sticky top-0 z-30">
       <div className="flex items-center gap-3">
         <button
-          className="lg:hidden text-muted hover:text-text-primary"
+          className="text-muted hover:text-text-primary"
           onClick={onMenuClick}
         >
           <Menu className="w-5 h-5" />

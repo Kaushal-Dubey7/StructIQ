@@ -8,8 +8,8 @@ export function PageWrapper({ title, children }) {
   return (
     <div className="min-h-screen bg-bg">
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      <div className="lg:ml-[240px]">
-        <TopBar title={title} onMenuClick={() => setSidebarOpen(true)} />
+      <div className={`transition-all duration-200 ${sidebarOpen ? 'lg:ml-[240px]' : ''}`}>
+        <TopBar title={title} onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
         <main className="p-6 lg:p-8">
           {children}
         </main>

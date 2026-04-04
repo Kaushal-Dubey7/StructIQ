@@ -57,15 +57,15 @@ export default function Register() {
   return (
     <div className="min-h-screen flex">
       {/* Left panel */}
-      <div className="hidden lg:flex lg:w-[60%] bg-gradient-to-br from-sidebar to-[#111827] flex-col justify-between p-12">
+      <div className="hidden lg:flex lg:w-[60%] bg-gradient-to-br from-sidebar to-[#0f172a] flex-col justify-between p-12 lg:px-20 lg:pt-20">
         <div>
-          <div className="flex items-center gap-2 mb-16">
+          <div className="flex items-center gap-2 mb-20">
             <Shield className="w-6 h-6 text-blue-accent" />
             <span className="text-white font-bold text-[22px] tracking-tight font-mono">
               STRUCT<span className="text-blue-accent">IQ</span>
             </span>
           </div>
-          <h1 className="text-white text-[38px] font-bold leading-tight mb-4">
+          <h1 className="text-white text-[38px] font-bold leading-tight mb-6">
             Join the<br />Operations Network.
           </h1>
           <p className="text-slate-400 text-[16px] max-w-md leading-relaxed">
@@ -76,40 +76,42 @@ export default function Register() {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center p-8">
+      <div className="flex-1 flex items-center justify-center min-h-screen bg-slate-950 p-8 sm:p-12">
         <div className="w-full max-w-[380px]">
-          <div className="lg:hidden flex items-center gap-2 mb-8">
+          <div className="lg:hidden flex items-center gap-2 mb-10">
             <Shield className="w-5 h-5 text-blue-accent" />
-            <span className="font-bold text-[20px] tracking-tight font-mono">
+            <span className="text-white font-bold text-[20px] tracking-tight font-mono">
               STRUCT<span className="text-blue-accent">IQ</span>
             </span>
           </div>
 
-          <h2 className="text-[20px] font-semibold text-text-primary mb-1">Create Account</h2>
-          <p className="text-[14px] text-muted mb-6">Register as a new agent.</p>
+          <h2 className="text-[24px] font-semibold text-white mb-2">Create Account</h2>
+          <p className="text-[14px] text-slate-400 mb-8">Register as a new agent.</p>
 
           {serverError && (
-            <div className="bg-danger-tint border border-danger/20 text-danger text-[13px] px-4 py-3 rounded-[6px] mb-4">
+            <div className="bg-red-900/30 border border-red-500/50 text-red-400 text-[13px] px-4 py-3 rounded-[6px] mb-6">
               {serverError}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <Input label="Full Name" placeholder="Agent Torres" icon={User} value={form.name} onChange={e => handleChange('name', e.target.value)} error={errors.name} />
-            <Input label="Badge ID" placeholder="DTX-4471" icon={BadgeCheck} value={form.badge} onChange={e => handleChange('badge', e.target.value)} />
-            <Input label="Department" placeholder="Tactical Operations" icon={Building} value={form.department} onChange={e => handleChange('department', e.target.value)} />
-            <Input label="Email" type="email" placeholder="agent@structiq.gov" icon={Mail} value={form.email} onChange={e => handleChange('email', e.target.value)} error={errors.email} />
-            <Input label="Password" type="password" placeholder="Min 6 characters" icon={Lock} value={form.password} onChange={e => handleChange('password', e.target.value)} error={errors.password} />
-            <Input label="Confirm Password" type="password" placeholder="Confirm password" icon={Lock} value={form.confirmPassword} onChange={e => handleChange('confirmPassword', e.target.value)} error={errors.confirmPassword} />
+          <form onSubmit={handleSubmit} className="space-y-4 [&_label]:text-slate-300">
+            <Input label="Full Name" placeholder="Agent Torres" icon={User} value={form.name} onChange={e => handleChange('name', e.target.value)} error={errors.name} className="bg-slate-800/50 border-slate-700 text-slate-200 placeholder:text-slate-500" />
+            <Input label="Badge ID" placeholder="DTX-4471" icon={BadgeCheck} value={form.badge} onChange={e => handleChange('badge', e.target.value)} className="bg-slate-800/50 border-slate-700 text-slate-200 placeholder:text-slate-500" />
+            <Input label="Department" placeholder="Tactical Operations" icon={Building} value={form.department} onChange={e => handleChange('department', e.target.value)} className="bg-slate-800/50 border-slate-700 text-slate-200 placeholder:text-slate-500" />
+            <Input label="Email" type="email" placeholder="agent@structiq.gov" icon={Mail} value={form.email} onChange={e => handleChange('email', e.target.value)} error={errors.email} className="bg-slate-800/50 border-slate-700 text-slate-200 placeholder:text-slate-500" />
+            <Input label="Password" type="password" placeholder="Min 6 characters" icon={Lock} value={form.password} onChange={e => handleChange('password', e.target.value)} error={errors.password} className="bg-slate-800/50 border-slate-700 text-slate-200 placeholder:text-slate-500" />
+            <Input label="Confirm Password" type="password" placeholder="Confirm password" icon={Lock} value={form.confirmPassword} onChange={e => handleChange('confirmPassword', e.target.value)} error={errors.confirmPassword} className="bg-slate-800/50 border-slate-700 text-slate-200 placeholder:text-slate-500" />
 
-            <Button type="submit" className="w-full" size="lg" disabled={loading}>
-              {loading ? 'Creating Account...' : 'Create Account'}
-            </Button>
+            <div className="pt-4">
+              <Button type="submit" className="w-full shadow-lg shadow-blue-accent/20" size="lg" disabled={loading}>
+                {loading ? 'Creating Account...' : 'Create Account'}
+              </Button>
+            </div>
           </form>
 
-          <div className="mt-6 text-center">
-            <span className="text-[14px] text-muted">Already registered? </span>
-            <Link to="/login" className="text-[14px] font-medium text-blue-accent hover:text-blue-hover">
+          <div className="mt-8 text-center border-t border-slate-800 pt-6">
+            <span className="text-[14px] text-slate-400">Already registered? </span>
+            <Link to="/login" className="text-[14px] font-medium text-blue-accent hover:text-blue-400 transition-colors">
               Sign in
             </Link>
           </div>

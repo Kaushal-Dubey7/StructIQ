@@ -40,17 +40,49 @@ Format as a numbered day-by-day plan. Keep it tactical, professional, and action
     })
     return response.choices[0].message.content.trim()
   } catch (err) {
-    console.warn('OpenAI API failed (likely billing/quota issue). Using fallback itinerary.', err.message)
-    return `DAY 1 — DEPLOYMENT
-0600: Team assembly and briefing.
-0700: Depart from ${origin}.
-1500: Arrive at ${destination} and secure operational base.
-
-DAY 2 — OPERATIONS
-0800: Begin tactical tracking and investigation.
-1800: Debrief and file status report.
-
-BUDGET ADVISORY
-Total allocated: $${budget.total}. Ensure all receipts are logged with Command.`
+    console.warn('OpenAI API failed (likely billing/quota issue). Using dynamic fallback itinerary.', err.message)
+    
+    // Build a dynamic itinerary based on inputs
+    const start = new Date(startDate)
+    const end = new Date(endDate)
+    const totalDays = Math.max(Math.ceil((end - start) / (1000 * 60 * 60 * 24)), 1)
+    
+    const lines = []
+    
+    // DAY 1: Deployment
+    lines.push(`DAY 1 — DEPLOYMENT`)
+    if (weather.summary && weather.summary.length > 0) {
+      lines.push(`0500: Weather Intel: ${weather.summary[0].condition}, with temps ranging ${weather.summary[0].minTemp}°C to ${weather.summary[0].maxTemp}°C.`)
+    }
+    lines.push(`0600: Assembly of ${teamSize} agents for mission briefing.`)
+    lines.push(`0700: Depart from ${origin} via ${travelMode}.`)
+    
+    if (totalDays > 1) {
+      lines.push(`1800: Secure overnight location en route or upon initial arrival.`)
+      lines.push('')
+      
+      // Middle days
+      for (let i = 2; i < totalDays; i++) {
+        lines.push(`DAY ${i} — TACTICAL OPERATIONS`)
+        lines.push(`0800: Reconnaissance phase. Ensure all ${teamSize} agents maintain radio silence.`)
+        lines.push(`1400: Execute objective tracking across local sectors.`)
+        lines.push(`1900: Evening debrief and risk assessment.`)
+        lines.push('')
+      }
+      
+      // Final day
+      lines.push(`DAY ${totalDays} — SECURE & EXTRACT`)
+    }
+    
+    lines.push(`1000: Finalize intelligence gathering at ${destination}.`)
+    lines.push(`1500: Conclude operation and initialize reporting protocol.`)
+    lines.push(`1800: Stand down.${totalDays > 1 ? ' Return transit preparation.' : ''}`)
+    lines.push('')
+    lines.push(`BUDGET & LOGISTICS ADVISORY`)
+    lines.push(`Total Distance: ${route.distanceText || 'Unknown'}. Estimated Transit Time: ${route.durationText || 'Unknown'}.`)
+    lines.push(`Total Allocated Funds: $${budget.total} USD (Status: ${budget.budgetStatus === 'high' ? 'CRITICAL - strictly monitor spending' : 'NOMINAL'}).`)
+    lines.push(`Ensure all ${teamSize} personnel log expense receipts with Command at mission end.`)
+    
+    return lines.join('\n')
   }
 }

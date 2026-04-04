@@ -34,7 +34,7 @@ export function Sidebar({ isOpen, onClose }) {
         />
       )}
 
-      <aside className={`fixed top-0 left-0 h-screen w-[240px] bg-gradient-to-b from-sidebar to-[#111827] flex flex-col z-50 transition-transform duration-200 lg:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <aside className={`fixed top-0 left-0 h-screen w-[240px] bg-gradient-to-b from-sidebar to-[#111827] flex flex-col z-50 transition-transform duration-200 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* Logo */}
         <div className="px-5 py-5 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -43,7 +43,7 @@ export function Sidebar({ isOpen, onClose }) {
               STRUCT<span className="text-blue-accent">IQ</span>
             </span>
           </div>
-          <button className="lg:hidden text-sidebar-text hover:text-white" onClick={onClose}>
+          <button className="text-sidebar-text hover:text-white" onClick={onClose}>
             <X className="w-5 h-5" />
           </button>
         </div>

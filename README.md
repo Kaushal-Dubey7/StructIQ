@@ -1,5 +1,5 @@
 # StructIQ — AI-Powered Mission Planning Dashboard
-
+ 
 A full-stack MERN application for law enforcement mission planning, integrating weather forecasting, route planning, budget estimation, and AI-generated tactical itineraries.
 
 ## Tech Stack
